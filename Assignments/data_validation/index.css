@@ -12,21 +12,22 @@ th {
   width: 160px;
 }
 #reasons{
-  width: 170px;
+  width: 225px;
 }
 
 #inputs {
   margin-top: 20px;
-  margin-left: 350px;
+  margin-left: 320px;
   padding-top: 20px;
   padding-left: 100px;
-  width: 500px;
-  border: 1px solid #c5c5c5;
+  width: 600px;
+  /* border: 1px solid #c5c5c5; */
 }
 
 input {
   height: 20px;
   margin-left: 20px;
+  
 }
 
 #first_input {
@@ -75,7 +76,7 @@ button {
 
 #target {
   display: inline-block;
-  margin-left: 50px;
+  margin-left: 35px;
   width: 40%;
 }
 
@@ -89,12 +90,21 @@ h2 {
   padding-left: 150px;
 }
 
-p {
+span {
   /* border: #dc3545; */
   color: #f39c12;
+  /* border: 1px solid #FA8072; */
+  /* color: #c00000; */
   /* color: #dc3545; */
   /* background-color:#DC3545; */
   width: 100%;
   /* margin-left: 90px; */
-  padding-left: 100px;
+  /* padding-left: 102px; */
+}
+
+#first_error{
+  /* width: 50%; */
+  /* padding-left: 82px; */
+
+
 }
