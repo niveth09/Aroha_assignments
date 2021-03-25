@@ -103,7 +103,10 @@ let addDataInError = (bankId, accountId, errorCode) => {
 };
 
 let checkMinimumBankIdLength = (value) => {
-  if (value.length < validLengthOfBankId) {
+  if (
+    value.length < validLengthOfBankId ||
+    value.length > validLengthOfBankId
+  ) {
     let bankId = document.getElementById("bank_id");
     bankId.borderColor = "red";
     firstErrorStatement.innerHTML = "Bank id should have 5 characters";
