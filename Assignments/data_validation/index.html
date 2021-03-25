@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body onload="focus()">
+    <div id="main_content">
+      <div id="content">
+        <div id="inputs">
+          <!-- <form> -->
+          <div id="first_input">
+            <label for="bank_id">Bank ID</label>
+            <input
+              type="text"
+              id="bank_id"
+              name="bank_id"
+              required
+              oninput="checkMinimumBankIdLength(this.value)"
+            />
+          </div>
+          <div id="second_input">
+            <label for="account_id">Account ID</label>
+            <input
+              id="account_id"
+              required
+              oninput="checkMinimumAccountIdLength(this.value)"
+            />
+          </div>
+          <!-- <input
+              type="submit"
+              value="Validate"
+              id="validate"
+              onclick="validation()"
+            /> -->
+          <button id="validate" onclick="validation()">Validate</button>
+          <!-- </form> -->
+        </div>
+        <div id="results">
+          <div id="target">
+            <h2>Target Grid</h2>
+            <table id="target_table">
+              <tr>
+                <th>Bank ID</th>
+                <th>Account Type</th>
+                <th>Account Number</th>
+              </tr>
+            </table>
+          </div>
+          <div id="error">
+            <table id="error_table">
+              <div id="error_grid_heading"><h2>Error Grid</h2></div>
+              <tr>
+                <th>Bank ID</th>
+                <th>Account ID</th>
+                <th id="reasons">Reasons</th>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

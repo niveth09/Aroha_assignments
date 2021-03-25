@@ -1,0 +1,100 @@
+* {
+  font-family: sans-serif;
+}
+table {
+  border-collapse: collapse;
+}
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  width: 160px;
+}
+#reasons{
+  width: 170px;
+}
+
+#inputs {
+  margin-top: 20px;
+  margin-left: 350px;
+  padding-top: 20px;
+  padding-left: 100px;
+  width: 500px;
+  border: 1px solid #c5c5c5;
+}
+
+input {
+  height: 20px;
+  margin-left: 20px;
+}
+
+#first_input {
+  padding-left: 50px;
+  margin-bottom: 20px;
+}
+
+#second_input {
+  padding-left: 30px;
+  margin-bottom: 20px;
+}
+input:focus {
+  outline: 1px solid #5553ff;
+}
+table:after {
+  border-color: green;
+}
+
+
+button {
+  height: 40px;
+  width: 100px;
+  text-align: center;
+  /* background-color: #efefef; */
+  border-radius: 3px;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+/* input[type="submit"]:hover {
+  /* color: white; */
+/* } */ 
+
+#validate {
+  margin-left: 132px;
+  background-color: #5553ff;
+  color: white;
+  margin-bottom: 20px;
+}
+
+#results {
+  margin-top: 50px;
+  width: 100%;
+}
+
+#target {
+  display: inline-block;
+  margin-left: 50px;
+  width: 40%;
+}
+
+#error {
+  display: inline-block;
+  margin-left: 70px;
+  width: 50%;
+}
+
+h2 {
+  padding-left: 150px;
+}
+
+p {
+  /* border: #dc3545; */
+  color: #f39c12;
+  /* color: #dc3545; */
+  /* background-color:#DC3545; */
+  width: 100%;
+  /* margin-left: 90px; */
+  padding-left: 100px;
+}
