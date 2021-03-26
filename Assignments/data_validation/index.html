@@ -16,6 +16,7 @@
               type="text"
               id="bank_id"
               name="bank_id"
+              placeholder="Enter bank id"
               required
               oninput="checkMinimumBankIdLength(this.value)"
             />
@@ -24,6 +25,7 @@
             <label for="account_id">Account ID</label>
             <input
               id="account_id"
+              placeholder="Enter account id"
               required
               oninput="checkMinimumAccountIdLength(this.value)"
             />
@@ -32,7 +34,20 @@
         </div>
         <div id="results">
           <div id="target">
-            <h2><img src="./assets/tick.svg" /> <span id="valid">Valid table </span></h2>
+            <h2>
+              <svg
+                id="tick"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.959 17l-4.5-4.319 1.395-1.435 3.08 2.937 7.021-7.183 1.422 1.409-8.418 8.591z"
+                />
+              </svg>
+              <span id="valid">Valid table </span>
+            </h2>
             <table id="target_table">
               <tr>
                 <th>Bank ID</th>
@@ -44,7 +59,20 @@
           <div id="error">
             <table id="error_table">
               <div id="error_grid_heading">
-                <h2><img src="assets/cancel.svg" /> <span id="invalid">Invalid table</span></h2>
+                <h2>
+                  <svg
+                    id="cancel"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.597 17.954l-4.591-4.55-4.555 4.596-1.405-1.405 4.547-4.592-4.593-4.552 1.405-1.405 4.588 4.543 4.545-4.589 1.416 1.403-4.546 4.587 4.592 4.548-1.403 1.416z"
+                    />
+                  </svg>
+                  <span id="invalid">Invalid table</span>
+                </h2>
               </div>
               <tr>
                 <th>Bank ID</th>

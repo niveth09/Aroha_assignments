@@ -8,6 +8,11 @@ let targetTable = document.getElementById("target_table");
 let errorTable = document.getElementById("error_table");
 let validHeading = document.getElementById("valid");
 let inValidHeading = document.getElementById("invalid");
+let tick_icon = document.getElementById("tick");
+let cancel_icon = document.getElementById("cancel");
+let tickColor = "#32de84";
+let cancelColor = "#F70000";
+let defaultColorOfHeading = "#f39c12";
 
 let target_grid = [];
 let error_grid = [];
@@ -19,7 +24,6 @@ let focus = () => {
 };
 
 let checkMinimumBankIdLength = (value) => {
-  firstErrorStatement.innerHTML = "";
   firstInputElement.appendChild(firstErrorStatement);
 
   if (value.length === 0)
@@ -34,12 +38,10 @@ let checkMinimumBankIdLength = (value) => {
 };
 
 let checkMinimumAccountIdLength = (value) => {
-  secondErrorStatement.innerHTML = "";
   secondInputElement.appendChild(secondErrorStatement);
   if (value.length === 0)
     secondErrorStatement.innerHTML = "Account id is mandatory";
-  else if (value.length === validLengthOfBankId)
-    secondInputElement.removeChild(secondErrorStatement);
+  else secondInputElement.removeChild(secondErrorStatement);
 };
 
 let validation = () => {
@@ -103,16 +105,22 @@ function addDataInTarget(bankId, accountId) {
   target_grid.push([bankId, accountTypeExpend(accountTypeCode), accountNumber]);
   let htmlRows = createHTMLElements(target_grid);
   targetTable.appendChild(htmlRows);
-  validHeading.style.color = "#32de84";
-  AfterAddingData(validHeading, "#f39c12");
+  validHeading.style.color = tickColor;
+  tick_icon.style.fill = tickColor;
+  // targetTable.borderColor = "5px solid #32de84";
+  AfterAddingData(tick_icon, validHeading, defaultColorOfHeading);
   clearDataInInputs();
 }
 
 let clearDataInInputs = () => {
   document.getElementById("bank_id").value = "";
   document.getElementById("account_id").value = "";
-  firstErrorStatement.innerHTML = "";
-  secondErrorStatement.innerHTML = "";
+  firstErrorStatement.remove();
+  secondErrorStatement.remove();
+  // firstInputElement.removeChild(firstErrorStatement);
+  // secondInputElement.removeChild(secondErrorStatement);
+  // firstErrorStatement.innerHTML = null;
+  // secondErrorStatement.innerHTML = null;
   focus();
 };
 
@@ -140,8 +148,9 @@ function addDataInError(bankId, accountId, errorCode) {
   error_grid.push([bankId, accountId, errorReasons(errorCode)]);
   let htmlRows = createHTMLElements(error_grid);
   errorTable.appendChild(htmlRows);
-  inValidHeading.style.color = "#FE0000";
-  AfterAddingData(inValidHeading, "#f39c12");
+  inValidHeading.style.color = cancelColor;
+  cancel_icon.style.fill = cancelColor;
+  AfterAddingData(cancel_icon, inValidHeading, defaultColorOfHeading);
   clearDataInInputs();
 }
 
@@ -159,12 +168,14 @@ let errorReasons = (reason_code) => {
     : "Duplicate Account Number";
 };
 
-function AfterAddingData(heading, color) {
+function AfterAddingData(icon, heading, color) {
   setTimeout(() => {
-    setColor(heading, color);
+    setColor(icon, heading, color);
   }, 1000);
 }
 
-function setColor(heading, color) {
+function setColor(icon, heading, color) {
   heading.style.color = color;
+  icon.style.fill = "black";
+  // targetTable.borderColor = "1px solid #dddddd";
 }
