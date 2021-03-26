@@ -3,43 +3,67 @@ let secondInputElement = document.getElementById("second_input");
 let firstErrorStatement = document.createElement("span");
 firstErrorStatement.id = "first_error";
 let secondErrorStatement = document.createElement("span");
+secondErrorStatement.id = "second_error";
 let targetTable = document.getElementById("target_table");
 let errorTable = document.getElementById("error_table");
+let validHeading = document.getElementById("valid");
+let inValidHeading = document.getElementById("invalid");
 
 let target_grid = [];
 let error_grid = [];
+let notFormattedValidData = [];
 let validLengthOfBankId = 5;
+
+let focus = () => {
+  document.getElementById("bank_id").focus();
+};
+
+let checkMinimumBankIdLength = (value) => {
+  firstErrorStatement.innerHTML = "";
+  firstInputElement.appendChild(firstErrorStatement);
+
+  if (value.length === 0)
+    firstErrorStatement.innerHTML = "Bank id is mandatory";
+  else if (
+    value.length < validLengthOfBankId ||
+    value.length > validLengthOfBankId
+  )
+    firstErrorStatement.innerHTML = "Bank id should have 5 characters";
+  else if (value.length === validLengthOfBankId)
+    firstInputElement.removeChild(firstErrorStatement);
+};
+
+let checkMinimumAccountIdLength = (value) => {
+  secondErrorStatement.innerHTML = "";
+  secondInputElement.appendChild(secondErrorStatement);
+  if (value.length === 0)
+    secondErrorStatement.innerHTML = "Account id is mandatory";
+  else if (value.length === validLengthOfBankId)
+    secondInputElement.removeChild(secondErrorStatement);
+};
 
 let validation = () => {
   let bankId = document.getElementById("bank_id").value;
   let accountId = document.getElementById("account_id").value;
-  accountIdValidation(bankId, accountId);
+  allValidations(bankId, accountId);
 };
 
-let accountIdValidation = (bankId, accountId) => {
-  if (bankId !== "" && accountId !== "") {
-    if (bankId.length === validLengthOfBankId) {
-      if (checkAllAreNumbers(bankId.slice(1))) {
-        if (checkFirstChar(accountId)) {
-          if (checkAccountIdLength(accountId)) {
-            if (checkAllAreNumbers(accountId.slice(1))) {
-              addDataInTarget(bankId, accountId);
-            } else {
-              addDataInError(bankId, accountId, "IA");
-            }
-          } else addDataInError(bankId, accountId, "L");
-        } else {
-          addDataInError(bankId, accountId, "I");
-        }
-      } else {
-        addDataInError(bankId, accountId, "IBN");
-      }
-    } else {
-      addDataInError(bankId, accountId, "IB");
-    }
-  } else {
-    alert("Both inputs are mandatory");
-  }
+let allValidations = (bankId, accountId) => {
+  if (bankId !== "" && accountId !== "")
+    if (bankId.length === validLengthOfBankId)
+      if (checkAllAreNumbers(bankId.slice(1)))
+        if (checkFirstChar(accountId))
+          if (checkAccountIdLength(accountId))
+            if (checkAllAreNumbers(accountId.slice(1)))
+              if (checkDuplicate(notFormattedValidData, [bankId, accountId]))
+                addDataInTarget(bankId, accountId);
+              else addDataInError(bankId, accountId, "D");
+            else addDataInError(bankId, accountId, "IA");
+          else addDataInError(bankId, accountId, "L");
+        else addDataInError(bankId, accountId, "I");
+      else addDataInError(bankId, accountId, "IBN");
+    else addDataInError(bankId, accountId, "IB");
+  else alert("Both inputs are mandatory");
 };
 
 let checkFirstChar = (accountId) => {
@@ -62,13 +86,34 @@ let checkAllAreNumbers = (idNumber) => {
   return true;
 };
 
-let addDataInTarget = (bankId, accountId) => {
+let checkDuplicate = (notFormattedValidData, currentRow) => {
+  for (i = 0; i < notFormattedValidData.length; i++)
+    for (j = 0; j < notFormattedValidData.length; j++)
+      if (notFormattedValidData[i][j] === currentRow[0])
+        if (notFormattedValidData[i][j][0] === currentRow[1][0])
+          if (notFormattedValidData[i][1].slice(1) === currentRow[1].slice(1))
+            return false;
+  return true;
+};
+
+function addDataInTarget(bankId, accountId) {
   let accountTypeCode = accountId[0].toUpperCase();
   let accountNumber = accountId.slice(1);
+  notFormattedValidData.push([bankId, accountId]);
   target_grid.push([bankId, accountTypeExpend(accountTypeCode), accountNumber]);
   let htmlRows = createHTMLElements(target_grid);
-  BeforeAddingData("green");
   targetTable.appendChild(htmlRows);
+  validHeading.style.color = "#32de84";
+  AfterAddingData(validHeading, "#f39c12");
+  clearDataInInputs();
+}
+
+let clearDataInInputs = () => {
+  document.getElementById("bank_id").value = "";
+  document.getElementById("account_id").value = "";
+  firstErrorStatement.innerHTML = "";
+  secondErrorStatement.innerHTML = "";
+  focus();
 };
 
 let accountTypeExpend = (accountTypeCode) => {
@@ -91,8 +136,16 @@ let createHTMLElements = (grid) => {
   }
   return htmlRowElement;
 };
+function addDataInError(bankId, accountId, errorCode) {
+  error_grid.push([bankId, accountId, errorReasons(errorCode)]);
+  let htmlRows = createHTMLElements(error_grid);
+  errorTable.appendChild(htmlRows);
+  inValidHeading.style.color = "#FE0000";
+  AfterAddingData(inValidHeading, "#f39c12");
+  clearDataInInputs();
+}
 
-let reasons = (reason_code) => {
+let errorReasons = (reason_code) => {
   return reason_code === "IB"
     ? "Invalid Bank ID Length"
     : reason_code === "IBN"
@@ -101,59 +154,17 @@ let reasons = (reason_code) => {
     ? "Invalid Account Type"
     : reason_code === "IA"
     ? "Invalid Account Number"
-    : "Invalid Account Number Length";
+    : reason_code === "L"
+    ? "Invalid Account Number Length"
+    : "Duplicate Account Number";
 };
 
-let addDataInError = (bankId, accountId, errorCode) => {
-  error_grid.push([bankId, accountId, reasons(errorCode)]);
-  let htmlRows = createHTMLElements(error_grid);
-  errorTable.appendChild(htmlRows);
-};
-
-let BeforeAddingData = (color) => {
+function AfterAddingData(heading, color) {
   setTimeout(() => {
-    setColor(color);
-  }, 1);
-};
-
-function setColor(color) {
-  console.log("color changing");
-  firstInputElement.style.borderColor = color;
+    setColor(heading, color);
+  }, 1000);
 }
 
-let checkMinimumBankIdLength = (value) => {
-  firstErrorStatement.innerHTML = "";
-  firstInputElement.appendChild(firstErrorStatement);
-
-  if (value.length === 0) {
-    firstErrorStatement.innerHTML = "Bank id is mandatory";
-  } else if (
-    value.length < validLengthOfBankId ||
-    value.length > validLengthOfBankId
-  ) {
-    // let bankId = document.getElementById("bank_id");
-    // bankId.style.outline = "none";
-    // bankId.style.borderColor = "#FA8072";
-    firstErrorStatement.innerHTML = "Bank id should have 5 characters";
-    // firstInputElement.appendChild(firstErrorStatement);
-  } else if (value.length === validLengthOfBankId) {
-    firstInputElement.removeChild(firstErrorStatement);
-  }
-};
-
-let checkMinimumAccountIdLength = (value) => {
-  secondErrorStatement.innerHTML = "";
-  secondInputElement.appendChild(secondErrorStatement);
-  if (value.length === 0) {
-    secondErrorStatement.innerHTML = "Account id is mandatory";
-    secondInputElement.appendChild(secondErrorStatement);
-  }
-  // else if (value.cha) { }
-  else if (value.length === validLengthOfBankId) {
-    secondInputElement.removeChild(secondErrorStatement);
-  }
-};
-
-let focus = () => {
-  document.getElementById("bank_id").focus();
-};
+function setColor(heading, color) {
+  heading.style.color = color;
+}

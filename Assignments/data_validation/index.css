@@ -3,7 +3,9 @@
 }
 table {
   border-collapse: collapse;
+  border: 1px solid #dddddd;
 }
+/* #dddddd */
 td,
 th {
   border: 1px solid #dddddd;
@@ -11,7 +13,8 @@ th {
   padding: 8px;
   width: 160px;
 }
-#reasons{
+
+#reasons {
   width: 225px;
 }
 
@@ -27,7 +30,6 @@ th {
 input {
   height: 20px;
   margin-left: 20px;
-  
 }
 
 #first_input {
@@ -42,10 +44,16 @@ input {
 input:focus {
   outline: 1px solid #5553ff;
 }
-table:after {
+/* table::after {
   border-color: green;
+} */
+img {
+  vertical-align: middle;
 }
 
+#target_table {
+  /* border: 1px solid green; */
+}
 
 button {
   height: 40px;
@@ -60,7 +68,7 @@ button {
 }
 /* input[type="submit"]:hover {
   /* color: white; */
-/* } */ 
+/* } */
 
 #validate {
   margin-left: 132px;
@@ -102,9 +110,11 @@ span {
   /* padding-left: 102px; */
 }
 
-#first_error{
+#first_error,
+#second_error {
+  color: #fe0000;
+  /* color: #ff0800; */
+  color: #FF003F;
   /* width: 50%; */
   /* padding-left: 82px; */
-
-
 }

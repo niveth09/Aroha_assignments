@@ -10,7 +10,6 @@
     <div id="main_content">
       <div id="content">
         <div id="inputs">
-          <!-- <form> -->
           <div id="first_input">
             <label for="bank_id">Bank ID</label>
             <input
@@ -29,18 +28,11 @@
               oninput="checkMinimumAccountIdLength(this.value)"
             />
           </div>
-          <!-- <input
-              type="submit"
-              value="Validate"
-              id="validate"
-              onclick="validation()"
-            /> -->
           <button id="validate" onclick="validation()">Validate</button>
-          <!-- </form> -->
         </div>
         <div id="results">
           <div id="target">
-            <h2>Valid Table</h2>
+            <h2><img src="./assets/tick.svg" /> <span id="valid">Valid table </span></h2>
             <table id="target_table">
               <tr>
                 <th>Bank ID</th>
@@ -51,7 +43,9 @@
           </div>
           <div id="error">
             <table id="error_table">
-              <div id="error_grid_heading"><h2>Invalid Table</h2></div>
+              <div id="error_grid_heading">
+                <h2><img src="assets/cancel.svg" /> <span id="invalid">Invalid table</span></h2>
+              </div>
               <tr>
                 <th>Bank ID</th>
                 <th>Account ID</th>
