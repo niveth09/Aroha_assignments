@@ -1,6 +1,7 @@
 * {
   font-family: sans-serif;
   /* font-size: 16px; */
+  /* overflow: hidden; */
 }
 table {
   border-collapse: collapse;
@@ -28,11 +29,15 @@ th {
 }
 
 input {
-  height: 25px;
+  height: 30px;
+  font-size: 14px;
   margin-left: 20px;
   padding-left: 5px;
   border-radius: 3px;
   border: 1px solid #ccc;
+}
+label {
+  font-size: 16px;
 }
 
 #first_input {
@@ -64,11 +69,22 @@ button {
   cursor: pointer;
 }
 
-#validate {
-  margin-left: 132px;
+#validate,
+#cancel_button,
+#ok_button {
   background-color: #5553ff;
   color: white;
   margin-bottom: 20px;
+}
+#validate {
+  margin-left: 132px;
+}
+
+#cancel_button,
+#ok_button {
+  display: inline-block;
+  margin-left: 15px;
+  margin-top: 5px;
 }
 
 #results {
@@ -100,12 +116,90 @@ span {
 
 #first_error,
 #second_error {
-  /* color: #ff003f; */
   color: #d63131;
   border: 1px solid #d63131;
   border-radius: 2px;
   padding: 4px;
   font-size: 14px;
-  margin-left: 15px;
+  margin-left: 10px;
   background-color: #f78f8f;
+}
+
+#delete_valid {
+  margin-left: 150px;
+}
+
+#delete_invalid {
+  margin-left: 220px;
+}
+
+#delete_valid:hover,
+#delete_invalid:hover {
+  cursor: pointer;
+}
+
+#delete_valid_inputs,
+#delete_invalid_inputs {
+  display: inline-block;
+}
+
+#delete_valid_button,
+#delete_invalid_button {
+  background-color: white;
+}
+
+#delete_valid,
+#delete_invalid {
+  fill: gray;
+  width: 22%;
+}
+
+#delete_valid:hover,
+#delete_invalid:hover {
+  fill: black;
+}
+
+#modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  /* margin: 180px 400px; */
+  /* padding-top: 100px; */
+  /* padding-left: 370px; */
+  margin-left: 450px;
+  margin-top: 140px;
+  text-align: center;
+  width: 30%;
+  height: 24%;
+  /* margin: auto; */
+  left: 0;
+  top: 0;
+  border: 1px solid black;
+  background-color: #fefefe;
+  /* background-color: rgb(0,0,0); */
+  /* background-color: rgba(0,0,0,0.4); */
+}
+
+#modal-content {
+  background-color: #fefefe;
+  /* padding: 20px 20px; */
+  /* padding-left:40px; */
+  border: 1px solid #888;
+  /* padding-left: 200px; */
+  width: 100%;
+  /* margin: auto; */
+  text-align: center;
+  padding-left: 30px;
+  padding-top: 40px;
+}
+
+.close {
+  color: #aaaaaa;
+  width: 30px;
+  padding-left: 80%;
+}
+
+.close:hover {
+  cursor: pointer;
+  color: #000;
 }

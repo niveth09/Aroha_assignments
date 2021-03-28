@@ -10,9 +10,11 @@ let validHeading = document.getElementById("valid");
 let inValidHeading = document.getElementById("invalid");
 let tick_icon = document.getElementById("tick");
 let cancel_icon = document.getElementById("cancel");
+let modal = document.getElementById("modal");
 let tickColor = "#32de84";
 let cancelColor = "#F70000";
 let defaultColorOfHeading = "#f39c12";
+let tableName;
 
 let target_grid = [];
 let error_grid = [];
@@ -24,11 +26,15 @@ let focus = () => {
 };
 
 let checkMinimumBankIdLength = (value) => {
+  let bankId = document.getElementById("bank_id");
   firstInputElement.appendChild(firstErrorStatement);
 
-  if (value.length === 0)
+  if (value.length === 0) {
     firstErrorStatement.innerHTML = "Bank id is mandatory";
-  else if (
+    // bankId.style.borderColor = "1px solid black";
+    bankId.style.borderColor = "2px solid #d63131";
+    console.log(bankId.borderColor);
+  } else if (
     value.length < validLengthOfBankId ||
     value.length > validLengthOfBankId
   )
@@ -107,7 +113,7 @@ function addDataInTarget(bankId, accountId) {
   targetTable.appendChild(htmlRows);
   validHeading.style.color = tickColor;
   tick_icon.style.fill = tickColor;
-  // targetTable.borderColor = "5px solid #32de84";
+  // targetTable.style.borderColor = "5px solid #32de84";
   AfterAddingData(tick_icon, validHeading, defaultColorOfHeading);
   clearDataInInputs();
 }
@@ -179,3 +185,83 @@ function setColor(icon, heading, color) {
   icon.style.fill = "black";
   // targetTable.borderColor = "1px solid #dddddd";
 }
+
+let deleteAll = (tableName) => {
+  if (tableName === "valid") {
+    target_grid = [];
+    notFormattedValidData = [];
+    removeRows(targetTable);
+  } else {
+    error_grid = [];
+    removeRows(errorTable);
+  }
+  closeModal();
+};
+
+let removeRows = (table) => {
+  while (table.children.length > 1) {
+    table.removeChild(table.lastChild);
+  }
+};
+
+let showModal = (table) => {
+  tableName = table;
+  table = table[0].toUpperCase() + table.slice(1);
+  if (modal.style.display === "") modal.style.display = "none";
+  if (modal.style.display === "none") {
+    let grid;
+    modal.style.display = "block";
+    let modalText = document.getElementById("modal_text");
+    let modalContent = document.getElementById("modal_content");
+    console.log(table);
+    let buttonGroup = createButtonGroup();
+    let isButtonGroupExists =
+      modalContent.lastElementChild.className === "button_group";
+
+    if (tableName === "valid") grid = target_grid;
+    else grid = error_grid;
+    if (grid.length === 0) {
+      modalText.innerHTML = `${table} table is empty`;
+      if (isButtonGroupExists) {
+        modalContent.removeChild(modalContent.lastElementChild);
+      }
+    } else {
+      modalText.innerHTML = `Do you want to delete all the ${table} data?`;
+      if (!isButtonGroupExists) {
+        modalContent.appendChild(buttonGroup);
+      }
+    }
+  }
+};
+
+let createButtonGroup = () => {
+  let buttonGroup = document.createElement("div");
+  buttonGroup.className = "button_group";
+  let okButton = document.createElement("button");
+  let cancelButton = document.createElement("button");
+  okButton.innerHTML = "Yes";
+  cancelButton.innerHTML = "Cancel";
+  okButton.id = "ok_button";
+  cancelButton.id = "cancel_button";
+  buttonGroup.appendChild(cancelButton);
+  buttonGroup.appendChild(okButton);
+
+  okButton.onclick = () => {
+    if (tableName === "valid") deleteAll("valid");
+    else deleteAll("invalid");
+  };
+
+  cancelButton.onclick = () => {
+    closeModal();
+  };
+
+  return buttonGroup;
+};
+
+let closeModal = () => {
+  modal.style.display = "none";
+};
+
+window.onclick = (event) => {
+  if (event.target == modal) modal.style.display = "none";
+};
