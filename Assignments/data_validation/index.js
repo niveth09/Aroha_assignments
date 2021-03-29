@@ -97,10 +97,14 @@ let checkAllAreNumbers = (idNumber) => {
 let checkDuplicate = (notFormattedValidData, currentRow) => {
   for (i = 0; i < notFormattedValidData.length; i++)
     for (j = 0; j < notFormattedValidData.length; j++)
-      if (notFormattedValidData[i][j] === currentRow[0])
+      if (
+        notFormattedValidData[i][0] === currentRow[0] ||
+        notFormattedValidData[i][1] === currentRow[1]
+      )
         if (notFormattedValidData[i][j][0] === currentRow[1][0])
           if (notFormattedValidData[i][1].slice(1) === currentRow[1].slice(1))
             return false;
+
   return true;
 };
 
