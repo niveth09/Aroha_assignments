@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div id="main_content">
+      <div id="content">
+        <div id="employee_records">
+          <!-- <form> -->
+          <h2>Employee Records</h2>
+          <div id="duplicate_error">
+            <p id="error">This employee details already exits</p>
+          </div>
+          <div id="form">
+            <div id="e_name">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+            <div id="e_email">
+              <label for="email">Email</label>
+              <input
+                type="text"
+                id="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div id="e_education">
+              <label for="select_education">Education</label>
+              <select id="select_education" required>
+                <option id="default_option">--select--</option>
+                <option value="Master degree">Master degree</option>
+                <option value="Bachelor degree">Bachelor degree</option>
+                <option value="Higher_secondary">Higher secondary</option>
+                <option value="Secondary">Secondary</option>
+              </select>
+            </div>
+            <div id="e_address">
+              <label for="address">Address</label>
+              <input type="text" id="address" required />
+            </div>
+            <div id="e_dob">
+              <label for="dob">DOB</label>
+              <input type="date" id="dob" required />
+            </div>
+            <div id="submit_button">
+              <button id="submit" onclick="getEmployeeDetails()">Submit</button>
+            </div>
+            <div id="records">
+              <div id="count_of_employee"><p id="count"></p></div>
+            </div>
+          </div>
+
+          <!-- </form> -->
+          <!-- <div id="details" if="checkEmployeeDetailsLength()"></div> -->
+        </div>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
