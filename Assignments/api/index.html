@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div id="content">
+      <div id="post_button_div">
+        <button id="post_button" onclick="getApi()">Get post</button>
+        <p id="no_of_posts"></p>
+      </div>
+      <div id="posts">
+        <select
+          id="kind_of_posts_select"
+          onchange="getSelectedOption(this.value)"
+          disabled
+        >
+          <option id="default_option">---select---</option>
+          <option value="top_five_posts">Top 5 posts</option>
+          <option value="top_five_unique_posts">
+            Top 5 unique user-id posts
+          </option>
+          <option value="filter_user-id">Filter using user id</option>
+        </select>
+        <select
+          id="user_id_select"
+          onchange="getUserIdSelectedOption(this.value)"
+        >
+          <option>---select user-id---</option>
+          <option value="1">User id 1</option>
+          <option value="2">User id 2</option>
+          <option value="3">User id 3</option>
+          <option value="4">User id 4</option>
+          <option value="5">User id 5</option>
+        </select>
+        <div id="unique_posts"></div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
